@@ -67,6 +67,8 @@
                     }
                 }
 
+                CloseCon($conn);
+
             ?>
 
         </table>

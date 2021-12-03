@@ -64,6 +64,8 @@
             <input type="text" name="staffEmail">
             <input type="submit" name="editSubmit" value="Delete">
         </form>
+        <br>
+        <a href="staff_dashboard.php">Back to Dashboard</a>
 
     </body>
 </html>

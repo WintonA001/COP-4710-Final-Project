@@ -62,7 +62,10 @@
                         $retrievedPassword = $passRow["password"];
 
                         if(strcmp($retrievedPassword, $userPassword) == 0)
-                        {echo "Login successful";}
+                        {
+                            session_start();
+                            $_SESSION["userEmail"] = $userEmail;
+                        }
                         else
                         {
                             echo "Password does not match";

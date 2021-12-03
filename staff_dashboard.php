@@ -15,6 +15,8 @@
             {
                 echo "<h3>Staff List<h3><br>";
                 echo "<a href='staff_list.php'>View List</a><br>";
+                echo "<br><h3>Register New Staff</h3><br>";
+                echo "<a href='staff_signup.php'>Register Staff</a>";
             }
         ?>
 
