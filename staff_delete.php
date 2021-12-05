@@ -28,6 +28,10 @@
             {
                 echo "Account with this email address not found.";
             }
+            CloseCon($conn);
+            session_start();
+            $_SESSION["opSuccess"] = "Deletion of account for " .$email. " successful.";
+            header("Location: http://localhost/staff_list.php");
         ?>
     </body>
 </html>

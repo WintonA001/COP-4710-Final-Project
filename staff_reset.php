@@ -18,8 +18,6 @@
             if(!$resetSt->execute())
             {
                 echo "Account with this email address not found.";
-                CloseCon($conn);
-                exit();
             }
             else
             {
@@ -27,9 +25,12 @@
                 $message = "Your password has been reset by the administrator.\n\nYour temporary password is: temporarypassword";
                 $headers = "From: noreply@localhost.com";
                 mail($email, $subject, $message, $headers);
-                CloseCon($conn);
                 echo "<h3>Account password for " .$email. " has been set to the temporary password.";
             }
+            CloseCon($conn);
+            session_start();
+            $_SESSION["opSuccess"] = "Reset of account password for " .$email. " successful.";
+            header("Location: http://localhost/staff_list.php");
         ?>
     </body>
 </html>

@@ -2,6 +2,8 @@
 <html>
     <body>
         <h1>Staff Dashboard</h1><br>
+        <a href="s_reset_password.php">Change Password</a><br>
+        <a href="logout_routine.php">Log Out</a><br>
         <?php
             session_start();
             if(!$_SESSION["userEmail"] || !$_SESSION["userPassword"])
@@ -51,5 +53,12 @@
             <br>
             <input type="submit" name="bookSubmit">
         </form>
+        <br><h3>Send Email to Teachers</h3><br>
+        <a href="teacher_list.php">Send Individual Email</a><br>
+        <a href="global_email.php">Send Global Email</a>
+
+        <br><h3>Set Dates for Automated Email</h3><br>
+        <a href="set_date.php">Set Date</a>
+
     </body>
 </html>
