@@ -64,6 +64,7 @@
                             session_start();
                             $_SESSION["userEmail"] = $userEmail;
                             $_SESSION["userPassword"] = $userPassword;
+                            $_SESSION["userType"] = "staff";
                             header("Location: http://localhost/staff_dashboard.php");
                         }
                         else

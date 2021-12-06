@@ -65,6 +65,8 @@
                         {
                             session_start();
                             $_SESSION["userEmail"] = $userEmail;
+                            $_SESSION["userType"] = "teacher";
+                            header("Location: http://localhost/teacher_dashboard.php");
                         }
                         else
                         {
