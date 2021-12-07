@@ -17,7 +17,8 @@
         <br>
         <table>
             <tr>
-                <th>Dates</th>
+                <th>Email Date</th>
+                <th>Due Date</th>
                 <th>Remove Date</th>
             </tr>
 
@@ -25,7 +26,7 @@
                 include 'db_connector.php';
                 $conn = OpenCon();
 
-                $dateQuery = "SELECT * FROM `reminder dates`";
+                $dateQuery = "SELECT * FROM `reminder dates` ORDER BY date";
                 $dateStmt = $conn->prepare($dateQuery);
                 if($dateStmt->execute())
                 {
@@ -34,6 +35,7 @@
                     {
                         echo "<tr>";
                         echo "<td>" .$row["date"]. "</td>";
+                        echo "<td>" .$row["due_date"]. "</td>";
                         echo "<td><form method='post' name='dateDeleter'><input type='hidden' name='deleteVal' value=" .$row["date"]. "><input type='submit' name='deleteSubmit' value='Delete'></form></td>";
                         echo "</tr>";
                     }
@@ -43,9 +45,22 @@
 
         </table>
         <br><br>
-
+        <h3>Create Date Entry</h3>
         <form method="post" name="dateSetter">
-            <input type="date" id="dateSet" name="dateSet" min=
+            Email date:
+            <br>
+            <input type="date" id="dateSet" name="emailDate" min=
+            <?php
+                date_default_timezone_set("EST");
+                $today = date_create(date("Y-m-d"));
+                $todayString = $today->format('Y-m-d');
+                echo "'" .$todayString. "'";
+            ?>
+            >
+            <br>
+            Due Date:
+            <br>
+            <input type="date" id="dueDate" name="dueDate" min=
             <?php
                 date_default_timezone_set("EST");
                 $today = date_create(date("Y-m-d"));
@@ -72,13 +87,14 @@
                 }
             }
 
-            if(isset($_POST["dateSet"]) && strcmp($_POST["dateSet"], "") != 0)
+            if(isset($_POST["dateSubmit"]) && strcmp($_POST["emailDate"], "") != 0 && strcmp($_POST["dueDate"], "") != 0)
             {
-                $date = $_POST["dateSet"];
+                $date = $_POST["emailDate"];
+                $dueDate = $_POST["dueDate"];
 
-                $dateQuery = "INSERT INTO `reminder dates`(date) VALUES (?)";
+                $dateQuery = "INSERT INTO `reminder dates`(date, due_date) VALUES (?,?)";
                 $dateStmt = $conn->prepare($dateQuery);
-                $dateStmt->bind_param("s", $date);
+                $dateStmt->bind_param("ss", $date, $dueDate);
                 if($dateStmt->execute())
                 {
                     header("Location: http://localhost/set_date.php");

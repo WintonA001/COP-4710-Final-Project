@@ -14,6 +14,9 @@
     while($row = $dateResult->fetch_assoc())
     {
         $dueDate = $row["date"];
+        $realDueDate = $row["due_date"];
+        $dueDateObj = strtotime($realDueDate);
+        $dueDateStr = date("m-d-y", $dueDateObj);
         
         if(strtotime($todayString) == strtotime($dueDate))
         {
@@ -22,7 +25,7 @@
             if($emailStmt->execute()) $emailResult=$emailStmt->get_result();
 
             $subject = "Book Request Due Reminder";
-            $message = "This is just a general reminder to all faculty that book requests are due next week!";
+            $message = "This is just a general reminder to all faculty that book requests are due " .$dueDateStr. " !";
             $headers = "From: noreply@localhost.com";
 
             while($row = $emailResult->fetch_assoc())
